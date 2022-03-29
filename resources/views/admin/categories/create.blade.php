@@ -36,7 +36,16 @@
             </div>
         </div>
         <div class="card-body">
-            Start creating your amazing application!
+            <form action="{{ route('categories.store') }}" method="POST">
+                <div class="form-group">
+                    @csrf
+                    <label>Название категории</label>
+                    <input type="text" class="form-control @error('title')
+                        is-invalid
+                    @enderror" name="title" placeholder="Название категории">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
