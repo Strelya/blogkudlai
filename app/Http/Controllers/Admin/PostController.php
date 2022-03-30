@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::paginate(10);
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -24,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::pluck('title', 'id')->all();
+        $tags = Tag::pluck('title', 'id')->all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -35,7 +41,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+            'category_id' => 'required|integer',
+            'thumbnail' => 'nullable|image',
+        ]);
+
+        $data = $request->all();
+        if ($request->hasFile('thumbnail')) {
+            $folder = date('Y-m-d');
+            $data['thumbnail'] = $request->file('thumbnail')->store("images/{$folder}");
+        }
+        $post = Post::create($data);
+        $post->tags()->sync($request->tags);
+
+        return redirect()->route('posts.index')->with('success', 'Статья добавлена');
     }
 
     /**
@@ -57,7 +79,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.posts.edit');
     }
 
     /**
@@ -69,7 +91,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        return redirect()->route('posts.index')->with('success', 'Статья отредактирована');
     }
 
     /**
@@ -80,6 +106,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Post::destroy($id);
+        return redirect()->route('posts.index')->with('success', 'Статья удалена');
     }
 }
