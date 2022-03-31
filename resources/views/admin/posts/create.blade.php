@@ -45,7 +45,7 @@
                     @enderror" name="title" placeholder="Название статьи">
                     <div class="form-group">
                         <label for="description">Цитата</label>
-                        <textarea class="form-control @error('title')
+                        <textarea class="form-control @error('description')
                         is-invalid
                     @enderror" id="description" name="description" rows="3" placeholder="Цитата ..."></textarea>
                     </div>
