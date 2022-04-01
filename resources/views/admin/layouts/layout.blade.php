@@ -297,6 +297,12 @@
                                 {{ session('success') }}
                             </ul>
                         </div>
+                        @elseif (session()->has('error'))
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled">
+                                {{ session('error') }}
+                            </ul>
+                        </div>
                         @endif
                     </div>
                 </div>
@@ -326,6 +332,11 @@
             .catch(error => {
                 console.error(error);
             });
+    </script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
     </script>
 </body>
 
