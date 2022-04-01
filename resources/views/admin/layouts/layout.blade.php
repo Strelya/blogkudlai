@@ -8,6 +8,11 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css') }}">
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 300px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -167,7 +172,7 @@
                         <img src="{{asset('assets/admin/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="{{ route('logout') }}" class="d-block">{{Auth::user()->name}} Logout</a>
                     </div>
                 </div>
 
@@ -314,6 +319,14 @@
     <!-- ./wrapper -->
 
     <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 </body>
 
 </html>

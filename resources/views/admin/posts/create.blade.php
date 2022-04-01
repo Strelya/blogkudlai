@@ -53,7 +53,7 @@
                         <label for="content">Контент</label>
                         <textarea class="form-control @error('content')
                         is-invalid
-                    @enderror" id="content" name="content" rows="5" placeholder="Контент ..."></textarea>
+                    @enderror" name="content" id="editor" rows="10" placeholder="Контент ..."></textarea>
                     </div>
                     <div class="form-group">
                         <label for="category_id">Категория</label>
