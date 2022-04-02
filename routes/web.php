@@ -20,7 +20,8 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [PostfController::class, 'index'])->name('home');
-Route::get('/articles', [PostfController::class, 'show'])->name('posts.single');
+Route::get('/articles/{slug}', [PostfController::class, 'show'])->name('posts.single');
+Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.single');
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('admin.index');
