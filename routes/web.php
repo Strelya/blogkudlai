@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\CategoryfController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\PostfController;
+use App\Http\Controllers\TagfController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\UserController;
 
@@ -20,8 +22,9 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [PostfController::class, 'index'])->name('home');
-Route::get('/articles/{slug}', [PostfController::class, 'show'])->name('posts.single');
-Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.single');
+Route::get('/article/{slug}', [PostfController::class, 'show'])->name('posts.single');
+Route::get('/category/{slug}', [CategoryfController::class, 'show'])->name('categories.single');
+Route::get('/tag/{slug}', [TagfController::class, 'show'])->name('tags.single');
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('admin.index');
