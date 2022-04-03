@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryfController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\PostfController;
 use App\Http\Controllers\TagfController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\UserController;
 
@@ -25,6 +26,7 @@ Route::get('/', [PostfController::class, 'index'])->name('home');
 Route::get('/article/{slug}', [PostfController::class, 'show'])->name('posts.single');
 Route::get('/category/{slug}', [CategoryfController::class, 'show'])->name('categories.single');
 Route::get('/tag/{slug}', [TagfController::class, 'show'])->name('tags.single');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('admin.index');
